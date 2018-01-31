@@ -1,0 +1,82 @@
+.VideoPlayer
+    height 150px
+    width 300px
+    background-color #333
+    box-shadow 0 0px 1px 1px rgba(0,0,0,.25)
+
+    &__preview
+        display flex
+        align-items center
+        justify-content center
+        position relative
+        height 100%
+        width 100%
+        opacity .9
+        transition .2s opacity ease-out
+
+    &:hover &__preview
+        opacity 1
+    &__play
+        position absolute
+        width 100%
+        height 100%
+        background url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAw%0AIDEwMDAiPjxwYXRoIGQ9Ik02OC4yIDkzNi4xVjY1LjNjMC00MC41IDQxLjktNzAuNiA4My4zLTQ2%0ALjkgMzMuMiAxOSA2OTYuMSA0MDEuOCA3NTIuNyA0MzQuNSAzNy4yIDIxLjUgMzYuNSA3Mi44IDAg%0AOTQuM0M4NjMuNCA1NzEuMyAxOTggOTU2IDE0OS44IDk4Mi44Yy0zNS4zIDE5LjUtODEuNi0yLjEt%0AODEuNi00Ni43eiIvPjwvc3ZnPg==') no-repeat center
+        background-size 50px
+        opacity .5
+        transition transform .2s ease-out
+        cursor pointer
+
+        &:hover
+            transform scale(1.1)
+
+
+    &__fullscreen
+        position absolute
+        top 0
+        left 0
+        display flex
+        align-items center
+        height 100%
+        width 100%
+        background-color rgba(0,0,0,.9)
+
+    &__fullscreen-inner
+        position relative
+        top 0
+        left 0
+        display flex
+        justify-content center
+        align-items center
+        width 100%
+        height 0
+        padding-bottom 56.25%
+        background-color #000
+
+    &__video
+        position absolute
+        top 0
+        left 0
+        height 100%
+        width 100%
+        transition .2s ease-out
+        transition-property opacity, transform
+        pointer-events none
+
+    &_paused &__video
+        opacity .5
+        transform scale(.9) translateZ(0)
+        backface-visibility hidden
+
+    &__pause
+        position absolute
+        top 0
+        height 100%
+        width 100%
+        background url('data:image/svg+xml;base64,PHN2ZyBoZWlnaHQ9IjUxMiIgd2lkdGg9IjUxMiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIw%0AMDAvc3ZnIj48cGF0aCBmaWxsPSIjZmNmY2ZjIiBkPSJNMjI0IDQzNS44Vjc2LjFjMC02LjctNS40%0ALTEyLjEtMTIuMi0xMi4xaC03MS42Yy02LjggMC0xMi4yIDUuNC0xMi4yIDEyLjF2MzU5LjdjMCA2%0ALjcgNS40IDEyLjIgMTIuMiAxMi4yaDcxLjZjNi44IDAgMTIuMi01LjQgMTIuMi0xMi4yek0zNzEu%0AOCA2NGgtNzEuNmMtNi43IDAtMTIuMiA1LjQtMTIuMiAxMi4xdjM1OS43YzAgNi43IDUuNCAxMi4y%0AIDEyLjIgMTIuMmg3MS42YzYuNyAwIDEyLjItNS40IDEyLjItMTIuMlY3Ni4xYzAtNi43LTUuNC0x%0AMi4xLTEyLjItMTIuMXoiLz48L3N2Zz4=') no-repeat center
+        background-size 150px
+        opacity 0
+        transition opacity .2s ease-out
+
+    &_paused &__pause
+        opacity 1
+

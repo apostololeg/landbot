@@ -1,8 +1,23 @@
-export const createElement = (tag, className, content = '') => {
-    const elem = document.createElement(tag)
+export const createElement = (props) => {
+    const {
+        tag,
+        className,
+        content,
+        attrs
+    } = props
+    const elem = document.createElement(tag || 'div')
 
-    className.split(' ').map(cls => elem.classList.add(cls))
-    elem.innerHTML = content
+    if (className) {
+        className.split(' ').map(cls => elem.classList.add(cls))
+    }
+
+    if (attrs) {
+        Object.keys(attrs).forEach(attr => elem.setAttribute(attr, attrs[attr]))
+    }
+
+    if (content) {
+        elem.append(content)
+    }
 
     return elem
 }

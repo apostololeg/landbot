@@ -18,7 +18,10 @@ class Button {
             Button_action: action
         })
 
-        this.domElem = createElement('button', classes)
+        this.domElem = createElement({
+            tag: 'button',
+            className: classes
+        })
 
         this.domElem.onclick = onClick
 

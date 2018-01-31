@@ -1,10 +1,12 @@
+import VideoPlayer from './VideoPlayer'
+
 export default {
     initial: [
         {
-            text: 'Hi, I\'m Robot Vera!'
+            content: 'Hi, I\'m Robot Vera!'
         },
         {
-            text: 'Would you like to ... ?',
+            content: 'Would you like to ... ?',
             actions: [
                 {
                     text: 'Show me',
@@ -16,10 +18,14 @@ export default {
     ],
     about: [
         {
-            text: 'Vera is ...'
+            content: 'Vera is ...',
+            component: () => new VideoPlayer({
+                youtubeID: 'IZk-x9Q4Z8U'
+            }).domElem
         },
         {
-            text: 'D u want to try ?',
+            delay: 3000,
+            content: 'D u want to try ?',
             actions: [
                 {
                     text: 'Try now',
@@ -35,11 +41,11 @@ export default {
     ],
     try: [
         {
-            text: 'Let\'s try! http://robotvera.com' // TODO: parse links: .match(/http.?:\/\/\w*/g)
+            content: 'Let\'s try! http://robotvera.com' // TODO: parse links: .match(/http.?:\/\/\w*/g)
         },
         {
             delay: 3000,
-            text: 'This was interesting ?',
+            content: 'This was interesting ?',
             actions: [
                 {
                     text: 'Yes',
@@ -54,19 +60,19 @@ export default {
     ],
     thanks: [
         {
-            text: 'Thanks! Hope you enjoyed.',
+            content: 'Thanks! Hope you enjoyed.',
             redirect: 'end'
         }
     ],
     sadEnd: [
         {
-            text: 'So sad =_(',
+            content: 'So sad =_(',
             redirect: 'end'
         }
     ],
     end: [
         {
-            text: 'Goodbye!'
+            content: 'Goodbye!'
         }
     ]
 }

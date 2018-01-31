@@ -3,38 +3,57 @@ import { createElement } from '../utils.js'
 import './Message.styl'
 
 class Message {
-    constructor(content = '', align) {
-        this.content = content
-        this.align = align
+    constructor(props) {
+        this.props = props
         this.render()
     }
 
-    getTime() {
+    render() {
+        const {
+            align,
+            content,
+            component,
+            showTime } = this.props
+        const classes = classnames({
+            Message: true,
+            [`Message_${align}`]: Boolean(align)
+        })
+        const wrapper = createElement({ className: 'Message__wrapper' })
+        const inner = createElement({ className: 'Message__inner' })
+
+        this.domElem = createElement({ className: classes })
+
+        if (component) {
+            inner.append(component())
+        }
+
+        if (content) {
+            const contentELem = createElement({ className: 'Message__content' })
+
+            if (Array.isArray(content)) {
+                content.forEach(item => contentELem.append(item))
+            } else {
+                contentELem.append(content)
+            }
+
+            inner.append(contentELem)
+        }
+
+        wrapper.append(inner)
+        showTime && wrapper.append(this.renderTime())
+        this.domElem.append(wrapper)
+
+    }
+
+    renderTime() {
         const date = new Date()
         const hours = date.getHours()
         const min = ('0' + date.getMinutes()).slice(-2)
 
-        return createElement('div', 'Message__time', `${hours}:${min}`)
-    }
-
-    render() {
-        const classes = classnames({
-            Message: true,
-            [`Message_${this.align}`]: Boolean(this.align)
+        return createElement({
+            className: 'Message__time',
+            content: `${hours}:${min}`
         })
-        const inner = createElement('div', 'Message__inner')
-
-        this.domElem = createElement('div', classes)
-
-
-        if (Array.isArray(this.content)) {
-            this.content.forEach(item => inner.append(item))
-        } else {
-            inner.append(this.content)
-        }
-
-        inner.append(this.getTime())
-        this.domElem.append(inner)
     }
 }
 

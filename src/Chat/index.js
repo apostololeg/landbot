@@ -4,7 +4,7 @@ import Message from '../Message'
 import { createElement } from '../utils.js'
 import './Chat.styl'
 
-const DELAY = 200
+const DELAY = 300
 const TYPING = 500
 
 class Chat {
@@ -31,34 +31,50 @@ class Chat {
     }
 
     onAction(text, stage) {
-        this.addMessage(text, 'right')
+        this.addMessage({ content: text }, 'right')
         this.currentStage = stage
         this.currentStep = 0
+        this.updateActions()
         this.next()
     }
 
     render() {
-        this.domElem = createElement('div', 'Chat')
+        this.domElem = createElement({ className: 'Chat' })
+        this._inner = createElement({ className: 'Chat__inner' });
 
+        [
+            this.renderContent(),
+            this.renderTyping(),
+            this.renderActions()
+        ].forEach(domElem => this._inner.append(domElem))
 
-        this._content = createElement('div', 'Chat__content')
-        this._actions = createElement('div', 'Chat__actions')
+        this.domElem.append(this._inner)
+    }
 
-        this.domElem.append(this._content)
-        this.renderTyping()
-        this.domElem.append(this._actions)
+    renderContent() {
+        this._content = createElement({ className: 'Chat__content' })
 
+        return this._content
     }
 
     renderTyping() {
-        this._typing = new Message([
-            createElement('div', 'Chat__typing-dot'),
-            createElement('div', 'Chat__typing-dot'),
-            createElement('div', 'Chat__typing-dot')
-        ])
+        this._typing = new Message({
+            content: [
+                createElement({ className: 'Chat__typing-dot' }),
+                createElement({ className: 'Chat__typing-dot' }),
+                createElement({ className: 'Chat__typing-dot' })
+            ]
+        })
 
         this._typing.domElem.classList.add('Chat__typing')
-        this.domElem.append(this._typing.domElem)
+
+        return this._typing.domElem
+    }
+
+    renderActions() {
+        this._actions = createElement({ className: 'Chat__actions' })
+
+        return this._actions
     }
 
     delay(time = DELAY) {
@@ -91,7 +107,7 @@ class Chat {
             .then(() => this.typing(typing))
             .then(() => {
                 this.history.push(step)
-                this.addMessage(step.text)
+                this.addMessage(step)
                 this.updateActions()
 
                 if (!this.getActions()) {
@@ -127,8 +143,12 @@ class Chat {
         })
     }
 
-    addMessage(text, align) {
-        const message = new Message(text, align)
+    addMessage(step, align) {
+        const message = new Message({
+            ...step,
+            align,
+            showTime: true
+        })
 
         this._content.append(message.domElem)
     }

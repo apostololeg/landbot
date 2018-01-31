@@ -1,21 +1,29 @@
 .Message
+    position relative
     display flex
+
+    &__wrapper
+        position relative
+        display flex
 
     &__inner
         position relative
         display inline-block
         background #fff
-        padding 10px 15px
         margin-top 3px
         border-radius 20px
         box-shadow 0 1px 1px 0 rgba(0,0,0,.1)
+        overflow hidden
+
+    &__content
+        padding 10px 15px
 
     &__time
         position absolute
         right -40px
         bottom 11px
         font-size 80%
-        color #666
+        color #333
         opacity 0
         transition opacity 3s ease-out
 

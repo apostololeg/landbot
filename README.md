@@ -58,6 +58,8 @@ Each key name of stage object used to link stages with actions.
 Every stage is an array, that contains one or several steps, that describes bot messages.
 
   * `text` – message
+  * `[component]` – function, that return component(DOM element), that will placed in chat in circle(click to open).
+  > NOTE: be sure you get imported components to bundle to use it.
   * `[delay]` (in ms) – time before step will be activated
   * `[typing]` (in ms) – time to show tying animation
   * `[actions]` – array of actions, that available for user after message appeared
