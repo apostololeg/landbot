@@ -1,0 +1,30 @@
+.Message
+    display flex
+
+    &__inner
+        position relative
+        display inline-block
+        background #fff
+        padding 10px 15px
+        margin-top 3px
+        border-radius 20px
+        box-shadow 0 1px 1px 0 rgba(0,0,0,.1)
+
+    &__time
+        position absolute
+        right -40px
+        bottom 11px
+        font-size 80%
+        color #666
+        opacity 0
+        transition opacity 3s ease-out
+
+    &:hover &__time
+        opacity 1
+        transition none
+
+    &_right
+        justify-content flex-end
+
+    &_right &__time
+        left -40px

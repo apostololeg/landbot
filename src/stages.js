@@ -7,8 +7,9 @@ export default {
             text: 'Would you like to ... ?',
             actions: [
                 {
-                    text: 'Yes, show me!',
-                    link: 'about'
+                    text: 'Show me',
+                    link: 'about',
+                    type: 'action'
                 }
             ]
         }
@@ -21,8 +22,9 @@ export default {
             text: 'D u want to try ?',
             actions: [
                 {
-                    text: 'Try now!',
-                    link: 'try'
+                    text: 'Try now',
+                    link: 'try',
+                    type: 'action'
                 },
                 {
                     text: 'No, thanks',
@@ -36,17 +38,24 @@ export default {
             text: 'Let\'s try! http://robotvera.com' // TODO: parse links: .match(/http.?:\/\/\w*/g)
         },
         {
+            delay: 3000,
             text: 'This was interesting ?',
             actions: [
                 {
-                    text: 'Yes!',
-                    link: 'end'
+                    text: 'Yes',
+                    link: 'thanks'
                 },
                 {
                     text: 'No',
                     link: 'sadEnd'
                 }
             ]
+        }
+    ],
+    thanks: [
+        {
+            text: 'Thanks! Hope you enjoyed.',
+            redirect: 'end'
         }
     ],
     sadEnd: [
